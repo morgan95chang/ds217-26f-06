@@ -1,0 +1,10 @@
+table,issue,decision,reason
+patients,exact duplicate rows,"Drop exact duplicates, keeping the first.",Exact repeats add no information and violate one row per patient.
+patients,gender spellings that are not a code,"Normalize known spellings to F, M, or X; leave unknown/blank missing.",Equivalent registry spellings should use the assignment codes.
+patients,site codes needing normalization,Uppercase codes and remove spaces and hyphens.,Formatting variants must match the site directory.
+patients,birth_year sentinel 9999,Replace 9999 with missing and use nullable Int64.,The dictionary defines 9999 as not recorded.
+visits,weight column named wt_kg in visits_south.csv,Rename wt_kg to weight_kg before stacking.,Both exports measure the same quantity under different names.
+visits,sbp sentinel 999 and readings outside 70 through 250,Set 999 and out-of-range SBP readings to missing.,The contract accepts only 70 through 250 and defines 999 as not measured.
+visits,impossible and loosely written visit dates,Keep only exact valid YYYY-MM-DD dates.,Invalid or loosely formatted text should not be interpreted under the date contract.
+visits,repeated patient_id and visit pairs,Keep the later reading after sorting by visit_time.,Rechecks violate the clean key and the assignment specifies retaining the later one.
+sites,repeated site_code rows,Keep only current site records.,Current and retired versions share a code; analysis needs the current directory entry.
